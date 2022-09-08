@@ -19,7 +19,7 @@ export default class Todos extends Component<Props, any> {
   render() {
     return (
       <div>
-        <TableContainer>
+        <TableContainer sx={{ border: "1px solid #ccc", mt: "20px" }}>
           <Table sx={{ minWidth: 650 }} aria-label="table">
             <TableHead>
               <TableRow>
@@ -33,13 +33,18 @@ export default class Todos extends Component<Props, any> {
             </TableHead>
             <TableBody>
               {this.props.todos &&
-                this.props.todos.map((todo: Todo) => (
+                this.props.todos.map((todo: Todo, i: number) => (
                   <TableRow
                     key={todo.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell>{todo.id}</TableCell>
-                    <TableCell align="left">{todo.taskName}</TableCell>
+                    <TableCell>{++i}</TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{ textTransform: "capitalize" }}
+                    >
+                      {todo.taskName}
+                    </TableCell>
                     <TableCell align="left">{todo.status}</TableCell>
                     <TableCell align="center">
                       <Button

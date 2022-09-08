@@ -27,7 +27,13 @@ export default class App extends Component {
   };
 
   handleOpenAddModal = () => this.setState({ openAddModal: true });
-  handleCloseAddModal = () => this.setState({ openAddModal: false });
+  handleCloseAddModal = () =>
+    this.setState({
+      openAddModal: false,
+      taskName: "",
+      status: "",
+      editId: "",
+    });
   handleonChangeTaskName = (e: React.ChangeEvent<HTMLInputElement>) =>
     this.setState({ taskName: e.target.value });
   handleonChangeStatus = (e: SelectChangeEvent<string>) =>
@@ -107,11 +113,13 @@ export default class App extends Component {
             handleEditUpdate={this.handleEditUpdate}
           />
 
-          <Todos
-            todos={this.state.todos}
-            handleDelete={this.handleDelete}
-            handleOpenAddModal={this.handleEditAddModal}
-          />
+          <Container maxWidth="md">
+            <Todos
+              todos={this.state.todos}
+              handleDelete={this.handleDelete}
+              handleOpenAddModal={this.handleEditAddModal}
+            />
+          </Container>
         </Container>
       </>
     );

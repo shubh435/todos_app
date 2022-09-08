@@ -10,3 +10,14 @@ body {
   box-sizing: border-box;
   background-color: #eef;
 }
+
+.css-1q1u3t4-MuiTableRow-root {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+}
+
+.css-1shveaz-MuiButtonBase-root-MuiButton-root {
+  width: 20px !important;
+  height: 20px !important;
+}

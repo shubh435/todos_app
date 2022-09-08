@@ -12,7 +12,7 @@ export default class Header extends Component<Props, any> {
   render() {
     return (
       <>
-        <AppBar position="static">
+        <AppBar position="static" sx={{ mt: "5px" }}>
           <Toolbar>
             <Typography
               variant="h6"
@@ -22,7 +22,11 @@ export default class Header extends Component<Props, any> {
             >
               TODOS APPLICATION
             </Typography>
-            <Button color="inherit" onClick={this.props.handleOpenAddModal}>
+            <Button
+              color="info"
+              onClick={this.props.handleOpenAddModal}
+              variant="contained"
+            >
               <AddIcon />
             </Button>
           </Toolbar>
