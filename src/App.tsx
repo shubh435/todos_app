@@ -10,6 +10,7 @@ interface State {
   status: string;
   todos: Todo[];
   editId: string | number;
+  error: string;
 }
 export interface Todo {
   id: number | string;
@@ -23,6 +24,7 @@ export default class App extends Component {
     taskName: "",
     status: "",
     editId: "",
+    error: "",
   };
 
   handleOpenAddModal = () => this.setState({ openAddModal: true });
@@ -110,6 +112,7 @@ export default class App extends Component {
             handleClose={this.handleCloseAddModal}
             handleAdd={this.handleAdd}
             handleEditUpdate={this.handleEditUpdate}
+            error={this.state.error}
           />
 
           <Container maxWidth="md">

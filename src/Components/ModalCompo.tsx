@@ -21,6 +21,7 @@ interface Props {
   handleClose: () => void;
   handleAdd: () => void;
   handleEditUpdate: (id: number | string) => void;
+  error: string;
 }
 interface State {}
 
@@ -126,6 +127,11 @@ export default class ModalCompo extends Component<Props, State> {
                   color="success"
                   variant="contained"
                   sx={{ width: "40%" }}
+                  disabled={
+                    this.props.status === "" ||
+                    this.props.taskName === "" ||
+                    this.props.error !== ""
+                  }
                   onClick={() => this.props.handleEditUpdate(this.props.editId)}
                 >
                   update
@@ -135,6 +141,11 @@ export default class ModalCompo extends Component<Props, State> {
                   color="success"
                   variant="contained"
                   sx={{ width: "40%" }}
+                  disabled={
+                    this.props.status === "" ||
+                    this.props.taskName === "" ||
+                    this.props.error !== ""
+                  }
                   onClick={this.props.handleAdd}
                 >
                   add
