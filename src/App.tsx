@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Container, SelectChangeEvent } from "@mui/material";
+import { AlertColor, Container, SelectChangeEvent } from "@mui/material";
 import Header from "./Components/Header";
 import ModalCompo from "./Components/ModalCompo";
 import Todos from "./Components/Todos";
+import SnackbarComp from "./Components/UI/SnackbarComp";
 
 interface State {
   openAddModal: boolean;
@@ -11,6 +12,9 @@ interface State {
   todos: Todo[];
   editId: string | number;
   error: string;
+  openSnackebar: boolean;
+  message: string;
+  type: AlertColor;
 }
 export interface Todo {
   id: number | string;
@@ -25,14 +29,20 @@ export default class App extends Component {
     status: "",
     editId: "",
     error: "",
+    openSnackebar: false,
+    type: "success",
+    message: "",
   };
 
   handleOpenAddModal = () => this.setState({ openAddModal: true });
+  handleCloseSnackbar = () =>
+    this.setState({ openSnackebar: false, message: "" });
   handleCloseAddModal = () =>
     this.setState({
       openAddModal: false,
       taskName: "",
       status: "",
+      message: "",
       editId: "",
     });
   handleonChangeTaskName = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -58,13 +68,21 @@ export default class App extends Component {
       openAddModal: false,
       status: "",
       taskName: "",
+      openSnackebar: true,
+      type: "success",
+      message: "Task added successfully",
     });
   };
 
   handleDelete = (id: number | string) => {
     const newTodos = this.state.todos.filter((todo: Todo) => todo.id !== id);
     localStorage.setItem("todos", JSON.stringify(newTodos));
-    this.setState({ todos: JSON.parse(localStorage.getItem("todos")!) });
+    this.setState({
+      todos: JSON.parse(localStorage.getItem("todos")!),
+      openSnackebar: true,
+      message: "Todos deleted",
+      type: "error",
+    });
   };
 
   handleEditAddModal = (id: number | string) => {
@@ -95,6 +113,9 @@ export default class App extends Component {
       status: "",
       editId: "",
       openAddModal: false,
+      openSnackebar: true,
+      message: "Todos updated !",
+      type: "success",
     });
   };
   render() {
@@ -114,7 +135,14 @@ export default class App extends Component {
             handleEditUpdate={this.handleEditUpdate}
             error={this.state.error}
           />
-
+          {this.state.message && (
+            <SnackbarComp
+              open={this.state.openSnackebar}
+              handleCloseSnackbar={this.handleCloseSnackbar}
+              message={this.state.message}
+              type={this.state.type}
+            />
+          )}
           <Container maxWidth="md">
             <Todos
               todos={this.state.todos}
