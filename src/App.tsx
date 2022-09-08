@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { Component } from "react";
 import { Container, SelectChangeEvent } from "@mui/material";
 import Header from "./Components/Header";
